@@ -1,0 +1,26 @@
+/* Smooth, eye-pleasing slate scrollbars */
+#terminal-logs::-webkit-scrollbar, 
+#history-list::-webkit-scrollbar, 
+pre::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+#terminal-logs::-webkit-scrollbar-track, 
+#history-list::-webkit-scrollbar-track, 
+pre::-webkit-scrollbar-track {
+  background: #0D1117;
+}
+
+#terminal-logs::-webkit-scrollbar-thumb, 
+#history-list::-webkit-scrollbar-thumb, 
+pre::-webkit-scrollbar-thumb {
+  background: #21262D;
+  border-radius: 4px;
+}
+
+#terminal-logs::-webkit-scrollbar-thumb:hover, 
+#history-list::-webkit-scrollbar-thumb:hover, 
+pre::-webkit-scrollbar-thumb:hover {
+  background: #58A6FF;
+}
