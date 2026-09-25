@@ -114,7 +114,12 @@ def generate_report(scan_result: dict[str, Any]) -> dict[str, Any]:
         cleaned = text.strip()
         if cleaned.startswith("```"):
             cleaned = cleaned.split("\n", 1)[1].rsplit("```", 1)[0].strip()
-        report: Any = AIReport.model_validate(json.loads(cleaned)).model_dump()
+        decoded: Any = json.loads(cleaned)
+        # Some OpenAI-compatible providers return a JSON object encoded as a
+        # JSON string even when response_format=json_object is requested.
+        if isinstance(decoded, str):
+            decoded = json.loads(decoded)
+        report: Any = AIReport.model_validate(decoded).model_dump()
     except json.JSONDecodeError:
         report = {"raw_text": text}
     except (TypeError, ValueError):
