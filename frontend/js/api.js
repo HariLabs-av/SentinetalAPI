@@ -3,7 +3,7 @@
  * The browser talks to FastAPI; scan credentials are sent only for the scan
  * request and are never stored in local history or rendered in results.
  */
-const API_BASE_URL = window.SENTINEL_API_BASE_URL || "http://127.0.0.1:8000";
+const API_BASE_URL = window.SENTINEL_API_BASE_URL || "https://sentinetalapi.onrender.com";
 
 const ApiService = {
   formatError(body, status) {
