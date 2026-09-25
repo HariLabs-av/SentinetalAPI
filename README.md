@@ -11,6 +11,7 @@ This repository is organized for GitHub:
 SentinelAPI/
 ├── backend/       FastAPI scanner, tests, docs, local demo target
 ├── frontend/      Static browser dashboard
+├── targets/       Vulnerable and secure Spring Boot demo APIs
 ├── .env.example
 └── README.md
 ```
@@ -18,6 +19,17 @@ SentinelAPI/
 Student ownership remains separated: Student 1 supplies the Java target APIs,
 Student 2 owns this scanner backend, Student 3 owns AI interpretation, and
 Student 4 owns the dashboard. The included frontend is an integration prototype.
+
+The two demo target applications are available at:
+
+```text
+targets/vulnerable-api/
+targets/secure-api/
+```
+
+Deploy them as separate Java services when hosting the complete demo. Set
+`DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET`, and the platform-provided
+`PORT` in each service; never use the local MySQL defaults in production.
 
 ## Local run
 

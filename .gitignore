@@ -17,6 +17,7 @@ __pycache__/
 *.pid
 backend/fallback-target/*.class
 backend/out/
+targets/**/target/
 
 # IDE/OS
 .idea/
