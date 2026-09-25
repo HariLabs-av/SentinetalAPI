@@ -39,6 +39,28 @@ def _ai_input(scan_result: dict[str, Any]) -> dict[str, Any]:
     return redact(safe)
 
 
+def _parse_guidance(text: str) -> dict[str, Any]:
+    cleaned = text.strip()
+    if "```" in cleaned:
+        cleaned = cleaned.replace("```json", "").replace("```", "").strip()
+    candidates = [cleaned]
+    start, end = cleaned.find("{"), cleaned.rfind("}")
+    if start >= 0 and end > start:
+        candidates.append(cleaned[start:end + 1])
+    last_error: Exception | None = None
+    for candidate in candidates:
+        try:
+            decoded: Any = json.loads(candidate)
+            for _ in range(2):
+                if not isinstance(decoded, str):
+                    break
+                decoded = json.loads(decoded)
+            return AIReport.model_validate(decoded).model_dump()
+        except (json.JSONDecodeError, TypeError, ValueError) as exc:
+            last_error = exc
+    raise ValueError("provider response did not match the guidance schema") from last_error
+
+
 def generate_report(scan_result: dict[str, Any]) -> dict[str, Any]:
     prompt = (
         "You are Student 3's API-security remediation advisor. Interpret only "
@@ -111,17 +133,7 @@ def generate_report(scan_result: dict[str, Any]) -> dict[str, Any]:
         raise AIProviderError(f"{provider.title()} returned an unusable response") from exc
 
     try:
-        cleaned = text.strip()
-        if cleaned.startswith("```"):
-            cleaned = cleaned.split("\n", 1)[1].rsplit("```", 1)[0].strip()
-        decoded: Any = json.loads(cleaned)
-        # Some OpenAI-compatible providers return a JSON object encoded as a
-        # JSON string even when response_format=json_object is requested.
-        if isinstance(decoded, str):
-            decoded = json.loads(decoded)
-        report: Any = AIReport.model_validate(decoded).model_dump()
-    except json.JSONDecodeError:
-        report = {"raw_text": text}
+        report: Any = _parse_guidance(text)
     except (TypeError, ValueError):
         report = {"raw_text": text, "validation_error": "Provider response did not match the guidance schema"}
     return {
