@@ -78,11 +78,12 @@ the authority for findings and developers must review AI guidance.
 Configure locally without committing the key:
 
 ```bash
-export GEMINI_API_KEY='your-replacement-key'
-export GEMINI_MODEL='gemini-2.5-flash'
+export AI_PROVIDER='groq'
+export GROQ_API_KEY='your-new-groq-key'
+export GROQ_MODEL='llama-3.3-70b-versatile'
 ```
 
-Never expose Gemini keys in frontend code or GitHub. Any key pasted into chat,
+Never expose AI provider keys in frontend code or GitHub. Any key pasted into chat,
 source, screenshots, or a public repository must be revoked and replaced.
 
 ## Hosting
