@@ -10,7 +10,7 @@ class Settings:
     max_workers: int = min(int(os.getenv("SENTINELAPI_MAX_WORKERS", "8")), 16)
     ai_provider: str = os.getenv("AI_PROVIDER", "groq").lower()
     groq_api_key: str | None = os.getenv("GROQ_API_KEY")
-    groq_model: str = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    groq_model: str = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
     groq_timeout: float = float(os.getenv("GROQ_TIMEOUT", "20"))
     gemini_api_key: str | None = os.getenv("GEMINI_API_KEY")
     gemini_model: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")

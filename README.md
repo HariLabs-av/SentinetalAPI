@@ -80,7 +80,7 @@ Configure locally without committing the key:
 ```bash
 export AI_PROVIDER='groq'
 export GROQ_API_KEY='your-new-groq-key'
-export GROQ_MODEL='llama-3.3-70b-versatile'
+export GROQ_MODEL='openai/gpt-oss-120b'
 ```
 
 Never expose AI provider keys in frontend code or GitHub. Any key pasted into chat,

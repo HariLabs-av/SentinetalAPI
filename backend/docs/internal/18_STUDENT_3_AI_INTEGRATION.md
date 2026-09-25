@@ -17,7 +17,7 @@ Configure Groq locally (Gemini remains supported):
 ```bash
 export AI_PROVIDER='groq'
 export GROQ_API_KEY='your-key'
-export GROQ_MODEL='llama-3.3-70b-versatile'
+export GROQ_MODEL='openai/gpt-oss-120b'
 ```
 
 Never commit the key, put it in a URL, or expose it to the frontend. The
