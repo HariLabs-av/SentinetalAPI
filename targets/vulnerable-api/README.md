@@ -119,3 +119,7 @@ The scanner can use:
   }
 }
 ```
+# Render deployment
+
+Create a Render Docker web service with root directory `targets/vulnerable-api`.
+The included Dockerfile builds and starts the API on Render's `PORT`.

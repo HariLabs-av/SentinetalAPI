@@ -105,3 +105,7 @@ OpenAPI URL:   http://localhost:8082/v3/api-docs
 For BOLA testing, use Alice's JWT and object IDs `101` and `102`.
 
 Only run the scanner against systems you own or are explicitly authorized to test.
+# Render deployment
+
+Create a Render Docker web service with root directory `targets/secure-api`.
+The included Dockerfile builds and starts the API on Render's `PORT`.
